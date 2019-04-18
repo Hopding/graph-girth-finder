@@ -10,6 +10,13 @@ class Node:
   def add_connection(self, connection):
     self.connections.append(connection)
 
+  def breadth_first_search(self, visitor):
+    queue = [(None, self)]
+    for (parent, node) in queue:
+      visitor(node)
+      extension = [(node, conn) for conn in node.connections if conn != parent]
+      queue.extend(extension)
+
 
 class Graph:
   @staticmethod
@@ -36,4 +43,11 @@ class Graph:
         return node
     return None
 
+  def breadth_first_search(self, visitor):
+    if len(self.nodes) == 0: return
+    root_node = self.nodes[0]
+    # other_nodes = self.nodes[1:]
+
+    # TODO: Handle disconnected graphs...
+    root_node.breadth_first_search(visitor)
 

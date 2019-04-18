@@ -35,5 +35,11 @@ print()
 print('Constructing graph from adjacency matrix...')
 graph = Graph.from_adjacency_matrix(matrix)
 
+def visitor(node):
+  print(f'Visiting node {node.name}')
+
+graph.breadth_first_search(visitor)
+
+
 
 

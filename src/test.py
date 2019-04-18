@@ -46,6 +46,11 @@ test_cases = [
   ],
 
   [dedent("""
+    1
+  """), SelfLoopInMatrixError
+  ],
+
+  [dedent("""
     0 1 0
     0 0 1
     0 1 0
