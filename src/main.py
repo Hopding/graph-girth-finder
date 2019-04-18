@@ -1,6 +1,7 @@
 import sys
 
 from utils import parse_adjacency_matrix
+from graph import Graph
 
 if len(sys.argv) < 2:
   print('No input file specified')
@@ -30,6 +31,9 @@ except Exception as e:
   print('Exiting.')
   exit(1)
 print()
+
+print('Constructing graph from adjacency matrix...')
+graph = Graph.from_adjacency_matrix(matrix)
 
 
 
