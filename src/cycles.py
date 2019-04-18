@@ -15,7 +15,7 @@ def prev_path_to_node(path_to_node, all_paths):
   all_other_paths = [path for path in all_paths if path != path_to_node]
   all_paths_to_node = [path for path in all_other_paths if path[-1] == final_node]
   all_prev_paths = [path for path in all_paths_to_node if len(path) <= len(path_to_node)]
-  return min(all_prev_paths, key=lambda path: len(path_to_node) - len(path))
+  return max(all_prev_paths, key=len)
 
 
 def find_all_cycles(graph):
@@ -42,10 +42,9 @@ def find_all_cycles(graph):
       for full_path in other_paths:
         prev_path = prev_path_to_node(full_path, paths)
         ancestor = last_common_ancestor(prev_path, full_path)
-        # TODO: Change to fp_after_ancestor = full_path[full_path.index(ancestor):]
-        fp_ancestor_idx = full_path.index(ancestor)
-        pp_ancestor_idx = prev_path.index(ancestor)
-        cycle_path = full_path[fp_ancestor_idx:] + prev_path[pp_ancestor_idx + 1:-1]
+        fp_after_ancestor = full_path[full_path.index(ancestor):]
+        pp_after_ancestor = prev_path[prev_path.index(ancestor):]
+        cycle_path = fp_after_ancestor + pp_after_ancestor[1:-1]
         cycle_paths.append(cycle_path)
 
   return cycle_paths
