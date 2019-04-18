@@ -74,8 +74,9 @@ if __name__ == '__main__':
   for (idx, test_case) in enumerate(test_cases):
     matrix = test_case[0]
     result = test_case[1]
+    is_error_test = isclass(result) and issubclass(result, Exception)
 
-    if isclass(result) and issubclass(result, Exception):
+    if is_error_test:
       test_name = f'test_{result.__name__}_{idx}'
       test = create_error_test(matrix, result)
     else:

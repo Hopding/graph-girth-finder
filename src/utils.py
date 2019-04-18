@@ -6,14 +6,24 @@ class SelfLoopInMatrixError(Exception): pass
 class NonsymmetricMatrixError(Exception): pass
 
 
-def parse_adjacency_matrix(matrix_str):
+def parse_adjacency_matrix(matrix_str, log=False):
+  if log: print('Parsing matrix...')
   lines = matrix_str.strip().splitlines()
   raw_matrix = parse_matrix(lines)
+
+  if log: print('Validating matrix cells are 0 or 1...')
   validate_cells(raw_matrix, is_bit_str)
   matrix = map_cells(raw_matrix, int)
+
+  if log: print('Validating matrix is square...')
   validate_square(matrix)
+
+  if log: print('Validating matrix contains no self loops...')
   validate_no_self_loops(matrix)
+
+  if log: print('Validating matrix is symmetric...')
   validate_symmetric(matrix)
+
   return matrix
 
 def is_bit_str(n_str):

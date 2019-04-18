@@ -22,14 +22,13 @@ print(contents)
 print('-' * longest_line)
 print()
 
-print('Validating Adjacency Matrix...')
 try:
-  matrix = parse_adjacency_matrix(contents)
+  matrix = parse_adjacency_matrix(contents, log=True)
 except Exception as e:
+  print()
   print(e)
   print('Exiting.')
   exit(1)
-print('Done.')
 print()
 
 
