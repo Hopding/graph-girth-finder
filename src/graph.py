@@ -1,3 +1,9 @@
+def safe_get(list, idx):
+  try:
+    return list[idx]
+  except:
+    return None
+
 class Node:
   @staticmethod
   def with_id(id):
@@ -12,11 +18,18 @@ class Node:
       self.connections.append(connection)
 
   def breadth_first_search(self, visitor):
-    queue = [(None, self)]
-    for (parent, node) in queue:
-      visitor(node)
-      extension = [(node, conn) for conn in node.connections if conn != parent]
-      queue.extend(extension)
+    expanded_nodes = set()
+    queue = [([], self)]
+
+    for (parents, node) in queue:
+      visitor(node, parents)
+      parent = safe_get(parents, -1)
+
+      if node not in expanded_nodes:
+        new_parents = parents + [node]
+        extension = [(new_parents, conn) for conn in node.connections if conn != parent]
+        queue.extend(extension)
+        expanded_nodes.add(node)
 
 
 class Graph:
@@ -44,15 +57,18 @@ class Graph:
         return node
     return None
 
-  def breadth_first_search(self, visitor):
+  def breadth_first_search(self, visitor, roots=None):
+    if roots == None:
+      roots = range(len(self.nodes))
+
     visited_nodes = set()
 
-    def visitor_wrapper(node):
+    def visitor_wrapper(node, parents):
       visited_nodes.add(node)
-      visitor(node)
+      visitor(node, parents)
 
-    for node in self.nodes:
+    root_nodes = [self.nodes[idx] for idx in roots]
+
+    for node in root_nodes:
       if node not in visited_nodes:
         node.breadth_first_search(visitor_wrapper)
-
-

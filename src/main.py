@@ -35,8 +35,8 @@ print()
 print('Constructing graph from adjacency matrix...')
 graph = Graph.from_adjacency_matrix(matrix)
 
-def visitor(node):
-  print(f'Visiting node {node.id}')
+def visitor(node, parents):
+  print(f'Visiting node {node.id}, parents={parents}')
 
 graph.breadth_first_search(visitor)
 
