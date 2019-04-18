@@ -75,12 +75,11 @@ def validate_no_self_loops(matrix):
 def validate_symmetric(matrix):
   """Ensures matrix represents an undirected graph"""
 
-  for from_top in range(len(matrix)):
-    row = matrix[from_top]
+  matrix_height = len(matrix)
+  matrix_width  = len(matrix[0])
 
-    for from_left in range(len(row)):
-      from_bottom = (len(matrix) - 1) - from_top
-      from_right = (len(row) - 1) - from_left
-
-      if matrix[from_top][from_left] != matrix[from_bottom][from_right]:
-        raise NonsymmetricMatrixError(f'Found nonsymmetric cell in matrix: row={from_top} col={from_left}')
+  for from_top in range(matrix_height):
+    for from_left in range(matrix_width):
+      if matrix[from_top][from_left] != matrix[from_left][from_top]:
+        msg = f'Found nonsymmetric cell in matrix: row={from_top} col={from_left}'
+        raise NonsymmetricMatrixError(msg)

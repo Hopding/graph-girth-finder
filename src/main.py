@@ -2,6 +2,7 @@ import sys
 
 from utils import parse_adjacency_matrix
 from graph import Graph
+from cycles import find_all_cycles
 
 if len(sys.argv) < 2:
   print('No input file specified')
@@ -35,10 +36,11 @@ print()
 print('Constructing graph from adjacency matrix...')
 graph = Graph.from_adjacency_matrix(matrix)
 
-def visitor(node, parents):
-  print(f'Visiting node {node.id}, parents={parents}')
+# def visitor(node, parents):
+  # print(f'Visiting node {node.id}, parents={parents}')
+# graph.breadth_first_search(visitor)
 
-graph.breadth_first_search(visitor)
+find_all_cycles(graph)
 
 
 
