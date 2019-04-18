@@ -1,7 +1,5 @@
 import sys
 
-# from utils import is_bit_str, parse_matrix, validate_cells, map_cells, validate_square, validate_no_self_loops, validate_symmetric
-
 from utils import parse_adjacency_matrix
 
 if len(sys.argv) < 2:

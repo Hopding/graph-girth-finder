@@ -62,7 +62,6 @@ def validate_no_self_loops(matrix):
     if cell == 1:
       raise SelfLoopInMatrixError(f'Found self loop on vertex {left_offset}')
 
-
 def validate_symmetric(matrix):
   """Ensures matrix represents an undirected graph"""
 
