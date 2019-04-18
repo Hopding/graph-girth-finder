@@ -1,14 +1,15 @@
 class Node:
   @staticmethod
-  def with_name(name):
-    return Node(name)
+  def with_id(id):
+    return Node(id)
 
-  def __init__(self, name):
-    self.name = name
+  def __init__(self, id):
+    self.id = id
     self.connections = []
 
   def add_connection(self, connection):
-    self.connections.append(connection)
+    if connection not in self.connections:
+      self.connections.append(connection)
 
   def breadth_first_search(self, visitor):
     queue = [(None, self)]
@@ -27,27 +28,31 @@ class Graph:
     self.nodes = []
 
     for row_idx in range(len(matrix)):
-      node = Node.with_name(row_idx)
+      node = Node.with_id(row_idx)
       self.nodes.append(node)
 
     for (row_idx, row) in enumerate(matrix):
-      node = self.find_node_by_name(row_idx)
+      node = self.find_node_by_id(row_idx)
       for (edge_idx, edge) in enumerate(row):
         if edge == 1:
-          connection = self.find_node_by_name(edge_idx)
+          connection = self.find_node_by_id(edge_idx)
           node.add_connection(connection)
 
-  def find_node_by_name(self, name):
+  def find_node_by_id(self, id):
     for node in self.nodes:
-      if node.name == name:
+      if node.id == id:
         return node
     return None
 
   def breadth_first_search(self, visitor):
-    if len(self.nodes) == 0: return
-    root_node = self.nodes[0]
-    # other_nodes = self.nodes[1:]
+    visited_nodes = set()
 
-    # TODO: Handle disconnected graphs...
-    root_node.breadth_first_search(visitor)
+    def visitor_wrapper(node):
+      visited_nodes.add(node)
+      visitor(node)
+
+    for node in self.nodes:
+      if node not in visited_nodes:
+        node.breadth_first_search(visitor_wrapper)
+
 

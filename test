@@ -1,3 +1,4 @@
 #! /bin/bash
 
-python3.7 src/test.py
+python3.7 src/test_adjacency_matrix.py
+python3.7 src/test_graph.py
