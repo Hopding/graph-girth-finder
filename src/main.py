@@ -40,7 +40,11 @@ graph = Graph.from_adjacency_matrix(matrix)
   # print(f'Visiting node {node.id}, parents={parents}')
 # graph.breadth_first_search(visitor)
 
-find_all_cycles(graph)
+cycles = find_all_cycles(graph)
+
+for cycle in cycles:
+  path_ids = [str(node.id) for node in cycle]
+  print('Cycle:', ' -> '.join(path_ids + [path_ids[0]]))
 
 
 
