@@ -13,11 +13,14 @@ def last_common_ancestor(path_a, path_b):
 
 def prev_path_to_node(path_to_node, all_paths):
     final_node = path_to_node[-1]
-    all_other_paths = [path for path in all_paths if path != path_to_node]
+
+    all_other_paths = [
+        path for path in all_paths if path != path_to_node]
     all_paths_to_node = [
         path for path in all_other_paths if path[-1] == final_node]
-    all_prev_paths = [path for path in all_paths_to_node if len(
-        path) <= len(path_to_node)]
+    all_prev_paths = [
+        path for path in all_paths_to_node if len(path) <= len(path_to_node)]
+
     return max(all_prev_paths, key=len)
 
 
