@@ -11,6 +11,7 @@ echo
 file="src/test_graph.py"
 echo "• ${bold}RUNNING${normal} $file"
 python3.7 $file
+echo
 
 file="src/test_cycles.py"
 echo "• ${bold}RUNNING${normal} $file"

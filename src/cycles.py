@@ -37,13 +37,15 @@ def find_all_cycles(graph):
     paths = visitations[node]
 
     if len(paths) > 1:
-      other_paths = paths[1:]
+      unexpanded_paths = paths[1:]
 
-      for full_path in other_paths:
+      for full_path in unexpanded_paths:
         prev_path = prev_path_to_node(full_path, paths)
         ancestor = last_common_ancestor(prev_path, full_path)
+
         fp_after_ancestor = full_path[full_path.index(ancestor):]
         pp_after_ancestor = prev_path[prev_path.index(ancestor):]
+
         cycle_path = fp_after_ancestor + pp_after_ancestor[1:-1]
         cycle_paths.append(cycle_path)
 
