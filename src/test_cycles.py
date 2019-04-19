@@ -89,6 +89,8 @@ test_cases = [
     [1, 4, 2],
     [1, 2, 4],
   ]],
+
+  
 ]
 
 class TestFindAllCycles(unittest.TestCase):
