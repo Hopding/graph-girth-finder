@@ -1,8 +1,10 @@
 import sys
 
-from utils import parse_adjacency_matrix
+from utils import pretty_format_cycle
+from matrix import parse_adjacency_matrix
 from graph import Graph
 from cycles import find_all_cycles
+
 
 if len(sys.argv) < 2:
   print('No input file specified')
@@ -33,19 +35,25 @@ except Exception as e:
   exit(1)
 print()
 
-print('Constructing graph from adjacency matrix...')
 graph = Graph.from_adjacency_matrix(matrix)
 
-# def visitor(node, parents):
-  # print(f'Visiting node {node.id}, parents={parents}')
-# graph.breadth_first_search(visitor)
-
+print('Finding all cycles in graph...')
 cycles = find_all_cycles(graph)
-
+if len(cycles) == 0:
+  print('Graph contains no cycles.')
+  print('Exiting.')
+  exit(0)
 for cycle in cycles:
-  path_ids = [str(node.id) for node in cycle]
-  print('Cycle:', ' -> '.join(path_ids + [path_ids[0]]))
+  print('• Found cycle:', pretty_format_cycle(cycle))
+print()
 
+print('Finding girth of graph...')
+girth = min(map(len, cycles))
+print('• Found girth:', girth)
+print()
 
-
-
+print('Finding all cycles whose length equals the girth...')
+girth_cycles = [cycle for cycle in cycles if len(cycle) == girth]
+for cycle in girth_cycles:
+  pretty_cycle = pretty_format_cycle(cycle)
+  print('• Found girth cycle:', pretty_cycle)

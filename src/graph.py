@@ -1,8 +1,4 @@
-def safe_get(list, idx):
-  try:
-    return list[idx]
-  except:
-    return None
+from utils import safe_get
 
 class Node:
   @staticmethod

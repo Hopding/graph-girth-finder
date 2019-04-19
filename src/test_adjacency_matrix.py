@@ -3,7 +3,7 @@ import unittest
 from textwrap import dedent
 from inspect import isclass
 
-from utils import parse_adjacency_matrix, InvalidMatrixCellError, InvalidMatrixShapeError, SelfLoopInMatrixError, NonsymmetricMatrixError
+from matrix import parse_adjacency_matrix, InvalidMatrixCellError, InvalidMatrixShapeError, SelfLoopInMatrixError, NonsymmetricMatrixError
 
 test_cases = [
   [dedent("""
