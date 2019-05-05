@@ -1,6 +1,6 @@
-# UMSL CS5130 Project 2
+# Graph Girth Finder
 
-This program fulfills the requirements for CS5130 Project 2. It takes the adjacency matrix for an undirected graph as input, and outputs the graph's girth along with all cycles whose length is equal to the girth.
+This program takes the adjacency matrix for an undirected graph as input, and outputs the graph's girth along with all cycles whose length is equal to the girth.
 
 ## Program Outline
 
